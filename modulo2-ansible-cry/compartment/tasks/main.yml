@@ -1,0 +1,23 @@
+- name: Create compartment
+  oracle.oci.oci_identity_compartment:
+    parent_compartment_id: "{{ tenGUILHERME }}"
+    description: "Destinado para os recursos redes"
+    name: "RecursosRede"
+  register: RecursosRede
+  
+- name: Create compartment
+  oracle.oci.oci_identity_compartment:
+    parent_compartment_id: "{{ tenGUILHERME }}"
+    description: "Destinado para os recursos Compute"
+    name: "RecursosCompute"
+  register: RecursosCompute
+
+- name: Create compartment
+  oracle.oci.oci_identity_compartment:
+    parent_compartment_id: "{{ tenGUILHERME }}"
+    description: "Destinado para os recursos DB"
+    name: "RecursosDB"
+  register: RecursosDB
+
+
+

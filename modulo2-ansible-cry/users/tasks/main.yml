@@ -1,0 +1,64 @@
+---
+      
+   - name: Obtém ID do Grupo1
+     oracle.oci.oci_identity_group_facts:
+       name: "{{ group_name }}"
+       compartment_id: "{{ parent_compartment_ocid }}"
+     register: result 
+   - set_fact: 
+       group_ocid: "{{ result.groups[0].id }}"
+  
+   - name: Cria usuários, adiciona em grupo e define senha
+     include_tasks: "tcb-bmc-iam-cria-usuarios.yaml"
+     loop: "{{ usuarios }}"
+
+
+   - name: Obtém ID do Grupo2
+     oracle.oci.oci_identity_group_facts:
+       name: "{{ group_name1 }}"
+       compartment_id: "{{ parent_compartment_ocid }}"
+     register: result 
+   - set_fact: 
+       group_ocid: "{{ result.groups[0].id }}"
+  
+   - name: Cria usuários, adiciona em grupo e define senha
+     include_tasks: "tcb-bmc-iam-cria-usuarios.yaml"
+     loop: "{{ usuarios1 }}"
+
+   - name: Obtém ID do Grupo3
+     oracle.oci.oci_identity_group_facts:
+       name: "{{ group_name2 }}"
+       compartment_id: "{{ parent_compartment_ocid }}"
+     register: result 
+   - set_fact: 
+       group_ocid: "{{ result.groups[0].id }}"
+  
+   - name: Cria usuários, adiciona em grupo e define senha
+     include_tasks: "tcb-bmc-iam-cria-usuarios.yaml"
+     loop: "{{ usuarios2 }}"
+
+   - name: Obtém ID do Grupo4
+     oracle.oci.oci_identity_group_facts:
+       name: "{{ group_name3 }}"
+       compartment_id: "{{ parent_compartment_ocid }}"
+     register: result 
+   - set_fact: 
+       group_ocid: "{{ result.groups[0].id }}"
+  
+   - name: Cria usuários, adiciona em grupo e define senha
+     include_tasks: "tcb-bmc-iam-cria-usuarios.yaml"
+     loop: "{{ usuarios3 }}"
+
+   - name: Obtém ID do Grupo5
+     oracle.oci.oci_identity_group_facts:
+       name: "{{ group_name4 }}"
+       compartment_id: "{{ parent_compartment_ocid }}"
+     register: result 
+   - set_fact: 
+       group_ocid: "{{ result.groups[0].id }}"
+  
+   - name: Cria usuários, adiciona em grupo e define senha
+     include_tasks: "tcb-bmc-iam-cria-usuarios.yaml"
+     loop: "{{ usuarios4 }}"
+
+
