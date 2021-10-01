@@ -1,0 +1,63 @@
+---
+      # Criação da Política ComputeAdminPolicy
+      - name: Atribuição da policy para o grupo ComputeAdmin
+        oracle.oci.oci_identity_policy:
+          name: "ComputeAdminPolicy"
+          compartment_id: "{{ parent_compartment_ocid }}"
+          description: "Permissão para gerenciar os recursos de Compute"
+          statements: ["Allow group {{ compute_group_name }} to manage instance-family in compartment  RecursosCompute "]
+        register: result
+      - set_fact:
+          compute_policy_ocid: "{{ result.policy.id }}"
+
+
+      #Criação da Política DBAsAdminPolicy
+      - name: Atribuição da policy para o grupo DBAsAdmin
+        oracle.oci.oci_identity_policy:
+          name: "DBAsAdminPolicy"
+          compartment_id: "{{ parent_compartment_ocid }}"
+          description: "Permissão para gerenciar os recursos de Database"
+          statements: ["Allow group {{ dba_group_name }} to manage database-family in compartment  RecursosDB "]
+        register: result
+      - set_fact:
+          dba_policy_ocid: "{{ result.policy.id }}"
+
+
+      #Criação da Política TCBCloudAdminPolicy
+      - name: Atribuição da policy para o grupo TCBCloudAdmin
+        oracle.oci.oci_identity_policy:
+          name: "TCBCloudAdminPolicy"
+          compartment_id: "{{ parent_compartment_ocid }}"
+          description: "Permissão para gerenciar todos os recursos na tenancy"
+          statements: ["Allow group {{ cloudadm_group_name }} to manage all-resources in tenancy"]
+        register: result
+      - set_fact:
+          cloud_adm_policy_ocid: "{{ result.policy.id }}"
+
+
+
+      #Criação da Política OperadoresPolicy
+      - name: Atribuição da policy para o grupo Operadores
+        oracle.oci.oci_identity_policy:
+          name: "OperadoresPolicy"
+          compartment_id: "{{ parent_compartment_ocid }}"
+          description: "Permissão para visualizar inspecionando todos os recursos da Tenancy"
+          statements: ["Allow group {{ operadores_group_name }} to inspect all-resources in tenancy"]
+        register: result
+      - set_fact:
+          operadores_policy_ocid: "{{ result.policy.id }}"
+
+      #Criação da Política RedesAdminPolicy
+      - name: Atribuição da policy para o grupo RedesAdmin
+        oracle.oci.oci_identity_policy:
+          name: "RedesAdminPolicy"
+          compartment_id: "{{ parent_compartment_ocid }}"
+          description: "Permissão para gerenciar os recursos de Redes"
+          statements: ["Allow group {{ redes_group_name }} to manage virtual-network-family in compartment RecursosRede ",
+                       "Allow group {{ redes_group_name }} to manage load-balancers in compartment  RecursosRede"]
+        register: result
+      - set_fact:
+          redes_policy_ocid: "{{ result.policy.id }}"
+
+
+
